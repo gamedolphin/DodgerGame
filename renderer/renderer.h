@@ -14,12 +14,14 @@ namespace Dodger {
       uint8_t id;
       RenderType type;
       RenderObject* parent;
-      std::vector<RenderObject*> children;
+      std::vector<RenderObject> children;
+      float mtx[16];
     };
 
     bool Initialize(Dodger::Window::WindowConfig *window);
     bool Render(Dodger::Window::WindowConfig *window, RenderObject* root);
     bool Shutdown(Dodger::Window::WindowConfig *window);
+
     RenderObject CreateRoot();
   }
 }
