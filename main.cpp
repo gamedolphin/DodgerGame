@@ -13,11 +13,12 @@ int main( int argc, char* args[] ) {
   AppMem appMem;
   appMem.windowConfig = { 640, 400, "Dodger" };
   appMem.rootObject = Dodger::Renderer::CreateRoot();
+  appMem.gameMemory = Dodger::Game::CreateState();
 
   if(Window::Initialize(&appMem.windowConfig)) {
 
     // setup initial game
-    Game::Initialize(&appMem);
+    Game::Initialize(&appMem.gameMemory);
 
     // setup bgfx renderer
     Renderer::Initialize(&appMem.windowConfig);
@@ -29,14 +30,14 @@ int main( int argc, char* args[] ) {
         }
       }
       // update game world and setup render
-      Game::Update(&appMem);
+      Game::Update(&appMem.gameMemory);
 
       // flush to screen
       Renderer::Render(&appMem.windowConfig, &appMem.rootObject);
     }
   }
 
-  Game::Shutdown(&appMem);
+  Game::Shutdown(&appMem.gameMemory);
   Renderer::Shutdown(&appMem.windowConfig);
   Window::Shutdown(&appMem.windowConfig);
 

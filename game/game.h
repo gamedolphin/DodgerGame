@@ -1,13 +1,25 @@
 #ifndef HEADER_GAME
 #define HEADER_GAME
 
-#include "../core/app_mem.h"
+#include <cstdint>
 
 namespace Dodger {
+
   namespace Game {
-    bool Initialize(Dodger::AppMem *mem);
-    bool Update(Dodger::AppMem *mem);
-    bool Shutdown(Dodger::AppMem *mem);
+
+    struct GameMemory {
+      uint64_t permanentStorageSpace;
+      void *permanentStorage;
+
+      uint64_t transientStorageSpace;
+      void *transientStorage;
+    };
+
+    bool Initialize(GameMemory *mem);
+    bool Update(GameMemory *mem);
+    bool Shutdown(GameMemory *mem);
+
+    GameMemory CreateState();
   }
 }
 
